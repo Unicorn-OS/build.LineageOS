@@ -1,0 +1,69 @@
+[ 98% 133323/134944] build out/target/product/emu64x/obj/ETC/build-manifest_intermediates/build-manifest.xml (priority: 11)
+FAILED: out/target/product/emu64x/obj/ETC/build-manifest_intermediates/build-manifest.xml
+/bin/bash -c "(mkdir -p out/target/product/emu64x/obj/ETC/build-manifest_intermediates/ ) && (python3 .repo/repo/repo manifest -o - 
+-r | grep -Ev \"proprietary_\" > out/target/product/emu64x/obj/ETC/build-manifest_intermediates/build-manifest.xml )"
+Traceback (most recent call last):
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 218, in GetString
+    v = self._cache[_key(name)]
+        ~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'repo.worktree'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 379, in _SaveJson
+    with open(self._json, "w") as fd:
+         ^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system: '/home/me/.repo_.gitconfig.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/me/android/lineage/.repo/repo/main.py", line 874, in <module>
+    _Main(sys.argv[1:])
+  File "/home/me/android/lineage/.repo/repo/main.py", line 850, in _Main
+    result = repo._Run(name, gopts, argv) or 0
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/main.py", line 294, in _Run
+    result = run()
+             ^^^^^
+  File "/home/me/android/lineage/.repo/repo/main.py", line 275, in <lambda>
+    lambda: self._RunLong(name, gopts, argv, git_trace2_event_log) or 0
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/main.py", line 302, in _RunLong
+    outer_client = RepoClient(self.repodir)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/manifest_xml.py", line 2347, in __init__
+    super().__init__(
+  File "/home/me/android/lineage/.repo/repo/manifest_xml.py", line 460, in __init__
+    if os.path.exists(mp.gitdir) and mp.use_worktree:
+                                     ^^^^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/project.py", line 4104, in use_worktree
+    return self.config.GetBoolean("repo.worktree")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 191, in GetBoolean
+    v = self.GetString(name)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 221, in GetString
+    return self.defaults.GetString(name, all_keys=all_keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 218, in GetString
+    v = self._cache[_key(name)]
+        ^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 352, in _cache
+    self._cache_dict = self._Read()
+                       ^^^^^^^^^^^^
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 359, in _Read
+    self._SaveJson(d)
+  File "/home/me/android/lineage/.repo/repo/git_config.py", line 382, in _SaveJson
+    platform_utils.remove(self._json, missing_ok=True)
+  File "/home/me/android/lineage/.repo/repo/platform_utils.py", line 150, in remove
+    os.remove(longpath)
+OSError: [Errno 30] Read-only file system: '/home/me/.repo_.gitconfig.json'
+\nWrite to a read-only file system detected. Possible fixes include
+1. Generate file directly to out/ which is ReadWrite, #recommend solution
+2. BUILD_BROKEN_SRC_DIR_RW_ALLOWLIST := <my/path/1> <my/path/2> #discouraged, subset of source tree will be RW
+3. BUILD_BROKEN_SRC_DIR_IS_WRITABLE := true #highly discouraged, entire source tree will be RW
+18:06:24 ninja failed with: exit status 1
+
+#### failed to build some targets (03:33:17 (hh:mm:ss)) ####
